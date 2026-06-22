@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">
+Production Board
+</h2>
+
+<div class="row">
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<div class="card-header bg-primary text-white">
+
+Design
+
+</div>
+
+<div class="card-body">
+
+{% for order in design_orders %}
+
+<div class="card order-card">
+
+<div class="card-body">
+
+<b>{{ order.order_no }}</b>
+
+<br>
+
+{{ order.client_name }}
+
+<br><br>
+
+<a
+href="/order/{{order.id}}"
+class="btn btn-sm btn-primary">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<div class="card-header bg-success text-white">
+
+Printing
+
+</div>
+
+<div class="card-body">
+
+{% for order in printing_orders %}
+
+<div class="card order-card">
+
+<div class="card-body">
+
+<b>{{ order.order_no }}</b>
+
+<br>
+
+{{ order.client_name }}
+
+<br><br>
+
+<a
+href="/order/{{order.id}}"
+class="btn btn-sm btn-success">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<div class="card-header bg-warning">
+
+Packing
+
+</div>
+
+<div class="card-body">
+
+{% for order in packing_orders %}
+
+<div class="card order-card">
+
+<div class="card-body">
+
+<b>{{ order.order_no }}</b>
+
+<br>
+
+{{ order.client_name }}
+
+<br><br>
+
+<a
+href="/order/{{order.id}}"
+class="btn btn-sm btn-warning">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<div class="card-header bg-dark text-white">
+
+Dispatch
+
+</div>
+
+<div class="card-body">
+
+{% for order in dispatch_orders %}
+
+<div class="card order-card">
+
+<div class="card-body">
+
+<b>{{ order.order_no }}</b>
+
+<br>
+
+{{ order.client_name }}
+
+<br><br>
+
+<a
+href="/order/{{order.id}}"
+class="btn btn-sm btn-dark">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

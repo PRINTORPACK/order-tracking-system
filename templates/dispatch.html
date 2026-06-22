@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card dashboard-card">
+
+<div class="card-body">
+
+<h3>
+Dispatch Entry
+</h3>
+
+<form method="POST">
+
+<input
+class="form-control mb-3"
+name="transport_name"
+placeholder="Transport Name">
+
+<input
+class="form-control mb-3"
+name="lr_number"
+placeholder="LR Number">
+
+<input
+class="form-control mb-3"
+name="invoice_number"
+placeholder="Invoice Number">
+
+<input
+type="date"
+class="form-control mb-3"
+name="dispatch_date">
+
+<button
+class="btn btn-purple">
+
+Save Dispatch
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

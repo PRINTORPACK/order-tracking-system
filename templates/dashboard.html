@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">👋 Welcome Admin</h2>
+
+<form action="/search" class="mb-4">
+    <input class="form-control search-box" name="q" placeholder="🔍 Search Order / Client">
+</form>
+
+<h5 class="mb-3"><b>Overview</b></h5>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="card-number card-blue">{{ total_orders }}</div>
+                <p>Total Orders</p>
+            </div>
+        </div>
+    </div>
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="card-number card-green">{{ printing }}</div>
+                <p>Printing</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="card-number card-orange">{{ packing }}</div>
+                <p>Packing</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card dashboard-card">
+            <div class="card-body">
+                <div class="card-number card-blue">{{ dispatched }}</div>
+                <p>Dispatched</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card dashboard-card">
+    <div class="card-header bg-white border-0 pt-4 ps-4">
+        <h5>📦 Recent Orders</h5>
+    </div>
+    <div class="card-body">
+        {% for order in orders %}
+        <div class="card order-card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-2"><b>#{{ order.order_no }}</b></div>
+                    <div class="col-md-3">{{ order.client_name }}</div>
+                    <div class="col-md-3">{{ order.product }}</div>
+                    <div class="col-md-2">
+                        {% if order.status == 'Design' %}<span class="status-design">Design</span>
+                        {% elif order.status == 'Printing' %}<span class="status-printing">Printing</span>
+                        {% elif order.status == 'Packing' %}<span class="status-packing">Packing</span>
+                        {% else %}<span class="status-dispatched">{{ order.status }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2 text-end">
+                        <a href="/order/{{order.id}}" class="btn btn-purple">View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<a href="/add" class="quick-action">+</a>
+
+{% endblock %}

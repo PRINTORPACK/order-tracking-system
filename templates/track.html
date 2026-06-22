@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<h3>Order Tracking</h3>
+
+</div>
+
+<div class="card-body">
+
+<h2>{{order.order_no}}</h2>
+
+<p>
+Client:
+{{order.client_name}}
+</p>
+
+<p>
+Product:
+{{order.product}}
+</p>
+
+<p>
+Quantity:
+{{order.quantity}}
+</p>
+
+<p>
+Status:
+<b>{{order.status}}</b>
+</p>
+
+<img
+src="/{{order.qr_code}}"
+width="200">
+
+</div>
+
+</div>
+
+{% endblock %}

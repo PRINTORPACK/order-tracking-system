@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card dashboard-card">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between">
+
+            <h3>
+                Order #{{ order.order_no }}
+            </h3>
+
+            <span class="status-dispatched">
+                {{ order.status }}
+            </span>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <!-- LEFT SIDE -->
+
+            <div class="col-md-6">
+
+                <p>
+                    <b>Client:</b>
+                    {{ order.client_name }}
+                </p>
+
+                <p>
+                    <b>Mobile:</b>
+                    {{ order.mobile }}
+                </p>
+
+                <p>
+                    <b>Product:</b>
+                    {{ order.product }}
+                </p>
+
+                <p>
+                    <b>Size:</b>
+                    {{ order.size }}
+                </p>
+
+                <p>
+                    <b>Quantity:</b>
+                    {{ order.quantity }}
+                </p>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="col-md-6">
+
+                <h5>Inside Printing</h5>
+
+                <p>
+                    <b>Process:</b>
+                    {{ order.inside_process }}
+                </p>
+
+                <p>
+                    <b>Paper GSM:</b>
+                    {{ order.inside_gsm }}
+                </p>
+
+                <p>
+                    <b>Color Type:</b>
+                    {{ order.inside_color }}
+                </p>
+
+                <hr>
+
+                <h5>Outside Printing</h5>
+
+                <p>
+                    <b>Process:</b>
+                    {{ order.outside_process }}
+                </p>
+
+                <p>
+                    <b>Paper GSM:</b>
+                    {{ order.outside_gsm }}
+                </p>
+
+                <p>
+                    <b>Color Type:</b>
+                    {{ order.outside_color }}
+                </p>
+
+                <hr>
+
+                <p>
+                    <b>Staff:</b>
+                    {{ order.staff_name }}
+                </p>
+
+                <p>
+                    <b>Delivery Date:</b>
+                    {{ order.delivery_date }}
+                </p>
+
+                <p>
+                    <b>Remarks:</b>
+                    {{ order.remarks }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card dashboard-card">
+
+    <div class="card-header">
+        Production Timeline
+    </div>
+
+    <div class="card-body">
+
+        <div class="timeline">
+
+            <a class="btn btn-primary"
+               href="/update/{{order.id}}/Design">
+               Design
+            </a>
+
+            <a class="btn btn-success"
+               href="/update/{{order.id}}/Printing">
+               Printing
+            </a>
+
+            <a class="btn btn-warning"
+               href="/update/{{order.id}}/Packing">
+               Packing
+            </a>
+
+            <a class="btn btn-info"
+               href="/update/{{order.id}}/Ready Dispatch">
+               Ready Dispatch
+            </a>
+
+            <a class="btn btn-dark"
+               href="/update/{{order.id}}/Dispatched">
+               Dispatched
+            </a>
+
+            <a class="btn btn-secondary"
+               href="/update/{{order.id}}/Delivered">
+               Delivered
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br><br>
+
+<a href="/edit/{{ order.id }}"
+   class="btn btn-warning">
+   Edit Order
+</a>
+
+<a href="/delete/{{ order.id }}"
+   class="btn btn-danger"
+   onclick="return confirm('Delete this order?')">
+   Delete Order
+</a>
+
+<br><br>
+
+<div class="card dashboard-card">
+
+    <div class="card-header">
+        QR Tracking
+    </div>
+
+    <div class="card-body text-center">
+
+        {% if order.qr_code %}
+
+        <img
+            src="/{{ order.qr_code }}"
+            width="220">
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<br>
+
+<a href="/dispatch/{{order.id}}"
+   class="btn btn-purple">
+   Dispatch Entry
+</a>
+
+{% endblock %}

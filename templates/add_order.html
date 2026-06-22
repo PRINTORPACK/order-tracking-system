@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card dashboard-card">
+    <div class="card-header">
+        <h3>New Order</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <!-- Client Name -->
+                <div class="col-md-6 mb-3">
+                    <label>Client Name</label>
+                    <input class="form-control" name="client_name" required>
+                </div>
+
+                <!-- Mobile -->
+                <div class="col-md-6 mb-3">
+                    <label>Contact Number</label>
+                    <input class="form-control" name="mobile">
+                </div>
+
+                <!-- Product -->
+                <div class="col-md-6 mb-3">
+                    <label>Product</label>
+                    <input class="form-control" name="product">
+                </div>
+
+                <!-- Size -->
+                <div class="col-md-6 mb-3">
+                    <label>Size</label>
+                    <input class="form-control" name="size">
+                </div>
+
+                <!-- Quantity -->
+                <div class="col-md-12 mb-3">
+                    <label>Quantity</label>
+                    <input type="number" class="form-control" name="quantity">
+                </div>
+
+                <!-- INSIDE PRINTING -->
+                <div class="col-md-6 mb-3">
+                    <div class="card p-3 h-100">
+
+                        <h5 class="mb-3">Inside Printing</h5>
+
+                        <label>Process Type</label>
+                        <select class="form-control" name="inside_process">
+                            <option value="">Select</option>
+                            <option>UV</option>
+                            <option>Matte Lamination</option>
+                            <option>UV+Matte Lamination</option>
+                            <option>Drip-Off</option>
+                            <option>Glossy Lamination</option>
+                            <option>Emboss</option>
+                            <option>Other</option>
+                        </select>
+
+                        <br>
+
+                        <label>Paper GSM</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="inside_gsm">
+
+                        <br>
+
+                        <label>Color Type</label>
+                        <select class="form-control" name="inside_color">
+                            <option>Single Color</option>
+                            <option>Multi Color</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <!-- OUTSIDE PRINTING -->
+                <div class="col-md-6 mb-3">
+                    <div class="card p-3 h-100">
+
+                        <h5 class="mb-3">Outside Printing</h5>
+
+                        <label>Process Type</label>
+                        <select class="form-control" name="outside_process">
+                            <option value="">Select</option>
+                            <option>UV</option>
+                            <option>Matte Lamination</option>
+                            <option>UV+Matte Lamination</option>
+                            <option>Drip-Off</option>
+                            <option>Glossy Lamination</option>
+                            <option>Emboss</option>
+                            <option>Other</option>
+                        </select>
+
+                        <br>
+
+                        <label>Paper GSM</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="outside_gsm">
+
+                        <br>
+
+                        <label>Color Type</label>
+                        <select class="form-control" name="outside_color">
+                            <option></option>
+                            <option>Single Color</option>
+                            <option>Multi Color</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <!-- Staff -->
+                <div class="col-md-6 mb-3">
+                    <label>Order By (Staff Name)</label>
+                    <input class="form-control" name="staff_name">
+                </div>
+
+                <!-- Delivery -->
+                <div class="col-md-6 mb-3">
+                    <label>Delivery Date</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        name="delivery_date">
+                </div>
+
+                <!-- Notes -->
+                <div class="col-md-12 mb-3">
+                    <label>Other Notes</label>
+                    <textarea
+                        class="form-control"
+                        name="remarks"
+                        rows="4"></textarea>
+                </div>
+
+            </div>
+
+            <button class="btn btn-purple">
+                Save Order
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

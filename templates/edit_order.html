@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card dashboard-card">
+
+    <div class="card-header">
+        <h3>Edit Order</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <!-- Client Name -->
+                <div class="col-md-6 mb-3">
+                    <label>Client Name</label>
+                    <input
+                        class="form-control"
+                        name="client_name"
+                        value="{{ order.client_name }}"
+                        required>
+                </div>
+
+                <!-- Mobile -->
+                <div class="col-md-6 mb-3">
+                    <label>Contact Number</label>
+                    <input
+                        class="form-control"
+                        name="mobile"
+                        value="{{ order.mobile }}">
+                </div>
+
+                <!-- Product -->
+                <div class="col-md-6 mb-3">
+                    <label>Product</label>
+                    <input
+                        class="form-control"
+                        name="product"
+                        value="{{ order.product }}">
+                </div>
+
+                <!-- Size -->
+                <div class="col-md-6 mb-3">
+                    <label>Size</label>
+                    <input
+                        class="form-control"
+                        name="size"
+                        value="{{ order.size }}">
+                </div>
+
+                <!-- Quantity -->
+                <div class="col-md-12 mb-3">
+                    <label>Quantity</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="quantity"
+                        value="{{ order.quantity }}">
+                </div>
+
+                <!-- INSIDE PRINTING -->
+                <div class="col-md-6 mb-3">
+                    <div class="card p-3 h-100">
+
+                        <h5 class="mb-3">Inside Printing</h5>
+
+                        <label>Process Type</label>
+                        <select class="form-control" name="inside_process">
+                            <option value="">Select</option>
+
+                            <option {% if order.inside_process == 'UV' %}selected{% endif %}>UV</option>
+
+                            <option {% if order.inside_process == 'Matte Lamination' %}selected{% endif %}>
+                                Matte Lamination
+                            </option>
+
+                            <option {% if order.inside_process == 'UV+Matte Lamination' %}selected{% endif %}>
+                                UV+Matte Lamination
+                            </option>
+
+                            <option {% if order.inside_process == 'Drip-Off' %}selected{% endif %}>
+                                Drip-Off
+                            </option>
+
+                            <option {% if order.inside_process == 'Glossy Lamination' %}selected{% endif %}>
+                                Glossy Lamination
+                            </option>
+
+                            <option {% if order.inside_process == 'Emboss' %}selected{% endif %}>
+                                Emboss
+                            </option>
+
+                            <option {% if order.inside_process == 'Other' %}selected{% endif %}>
+                                Other
+                            </option>
+                        </select>
+
+                        <br>
+
+                        <label>Paper GSM</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="inside_gsm"
+                            value="{{ order.inside_gsm }}">
+
+                        <br>
+
+                        <label>Color Type</label>
+                        <select class="form-control" name="inside_color">
+                            <option {% if order.inside_color == 'Single Color' %}selected{% endif %}>
+                                Single Color
+                            </option>
+
+                            <option {% if order.inside_color == 'Multi Color' %}selected{% endif %}>
+                                Multi Color
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <!-- OUTSIDE PRINTING -->
+                <div class="col-md-6 mb-3">
+                    <div class="card p-3 h-100">
+
+                        <h5 class="mb-3">Outside Printing</h5>
+
+                        <label>Process Type</label>
+                        <select class="form-control" name="outside_process">
+                            <option value="">Select</option>
+
+                            <option {% if order.outside_process == 'UV' %}selected{% endif %}>UV</option>
+
+                            <option {% if order.outside_process == 'Matte Lamination' %}selected{% endif %}>
+                                Matte Lamination
+                            </option>
+
+                            <option {% if order.outside_process == 'UV+Matte Lamination' %}selected{% endif %}>
+                                UV+Matte Lamination
+                            </option>
+
+                            <option {% if order.outside_process == 'Drip-Off' %}selected{% endif %}>
+                                Drip-Off
+                            </option>
+
+                            <option {% if order.outside_process == 'Glossy Lamination' %}selected{% endif %}>
+                                Glossy Lamination
+                            </option>
+
+                            <option {% if order.outside_process == 'Emboss' %}selected{% endif %}>
+                                Emboss
+                            </option>
+
+                            <option {% if order.outside_process == 'Other' %}selected{% endif %}>
+                                Other
+                            </option>
+                        </select>
+
+                        <br>
+
+                        <label>Paper GSM</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="outside_gsm"
+                            value="{{ order.outside_gsm }}">
+
+                        <br>
+
+                        <label>Color Type</label>
+                        <select class="form-control" name="outside_color">
+                            <option {% if order.outside_color == 'Single Color' %}selected{% endif %}>
+                                Single Color
+                            </option>
+
+                            <option {% if order.outside_color == 'Multi Color' %}selected{% endif %}>
+                                Multi Color
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <!-- Staff -->
+                <div class="col-md-6 mb-3">
+                    <label>Order By (Staff Name)</label>
+                    <input
+                        class="form-control"
+                        name="staff_name"
+                        value="{{ order.staff_name }}">
+                </div>
+
+                <!-- Delivery -->
+                <div class="col-md-6 mb-3">
+                    <label>Delivery Date</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        name="delivery_date"
+                        value="{{ order.delivery_date }}">
+                </div>
+
+                <!-- Notes -->
+                <div class="col-md-12 mb-3">
+                    <label>Other Notes</label>
+                    <textarea
+                        class="form-control"
+                        name="remarks"
+                        rows="4">{{ order.remarks }}</textarea>
+                </div>
+
+            </div>
+
+            <button class="btn btn-success">
+                Update Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
