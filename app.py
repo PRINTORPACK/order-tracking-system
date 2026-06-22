@@ -182,7 +182,7 @@ def add_order():
         order_no = "ORD" + str(Order.query.count() + 1)
         os.makedirs("static/qr", exist_ok=True)
         qr_path = f"static/qr/{order_no}.png"
-        img = qrcode.make(f"http://127.0.0.1:5000/track/{order_no}")
+        img = qrcode.make(f"https://order-tracking-system-j9gk.onrender.com/track/{order_no}")
         img.save(qr_path)
 
         order = Order(
