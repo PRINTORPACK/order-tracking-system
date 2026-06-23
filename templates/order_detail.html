@@ -181,26 +181,6 @@
 
 <br><br>
 
-<div class="card dashboard-card">
-
-    <div class="card-header">
-        QR Tracking
-    </div>
-
-    <div class="card-body text-center">
-
-        {% if order.qr_code %}
-
-        <img
-            src="/{{ order.qr_code }}"
-            width="220">
-
-        {% endif %}
-
-    </div>
-
-</div>
-
 <br>
 
 <a href="/dispatch/{{order.id}}"

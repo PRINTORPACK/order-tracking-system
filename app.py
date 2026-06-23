@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
-import qrcode
 import os
 
 app = Flask(__name__)
 app.secret_key = "erp_secret_key_2026"
-app.secret_key = "erp_secret_key_2026"
+
 
 import os
 
@@ -68,8 +67,6 @@ class Order(db.Model):
 
     delivery_date = db.Column(db.String(50))
 
-    qr_code = db.Column(db.String(200))
-
     transport_name = db.Column(db.String(100))
 
     lr_number = db.Column(db.String(100))
@@ -101,26 +98,9 @@ def login():
     return render_template('login.html')
 @app.route('/logout')
 def logout():
-
     session.clear()
-
     return redirect('/login')
 
-    if request.method == 'POST':
-
-        username = request.form['username']
-        password = request.form['password']
-
-        if username == "admin" and password == "admin123":
-
-            session['user'] = username
-
-            return redirect('/dashboard')
-
-        return render_template(
-            'login.html',
-            error="Invalid Username or Password"
-        )
 @app.route('/customer-register', methods=['GET', 'POST'])
 def customer_register():
 
@@ -161,17 +141,9 @@ def customer_login():
 
 @app.route('/')
 def home():
-
     if 'user' in session:
         return redirect('/dashboard')
-
     return redirect('/login')
-
-    if 'user' in session:
-        return redirect('/dashboard')
-
-    return redirect('/login')
-
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_order():
@@ -180,11 +152,6 @@ def add_order():
 
     if request.method == 'POST':
         order_no = "ORD" + str(Order.query.count() + 1)
-        os.makedirs("static/qr", exist_ok=True)
-        qr_path = f"static/qr/{order_no}.png"
-        img = qrcode.make(f"https://order-tracking-system-j9gk.onrender.com/track/{order_no}")
-        img.save(qr_path)
-
         order = Order(
             order_no=order_no,
             client_name=request.form['client_name'],
@@ -201,7 +168,6 @@ def add_order():
             staff_name=request.form['staff_name'],
             remarks=request.form['remarks'],
             delivery_date=request.form['delivery_date'],
-            qr_code=qr_path,
             status='Design',
             amount=0
         )
@@ -245,6 +211,9 @@ def dashboard():
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_order(id):
 
+    if 'user' not in session:
+        return redirect('/login')
+
     order = Order.query.get_or_404(id)
 
     if request.method == 'POST':
@@ -279,10 +248,12 @@ def edit_order(id):
 @app.route('/delete/<int:id>')
 def delete_order(id):
 
+    if 'user' not in session:
+        return redirect('/login')
+
     order = Order.query.get_or_404(id)
 
     db.session.delete(order)
-
     db.session.commit()
 
     return redirect('/dashboard')
@@ -317,7 +288,6 @@ def search():
         dispatched=0
     )
 
-
 @app.route('/dispatch/<int:id>', methods=['GET', 'POST'])
 def dispatch(id):
 
@@ -347,6 +317,9 @@ def dispatch(id):
 @app.route('/production-board')
 def production_board():
 
+    if 'user' not in session:
+        return redirect('/login')
+
     design_orders = Order.query.filter_by(
         status="Design"
     ).all()
@@ -375,6 +348,9 @@ def production_board():
 
 @app.route('/reports')
 def reports():
+
+    if 'user' not in session:
+        return redirect('/login')
 
     total_orders = Order.query.count()
 
@@ -410,11 +386,19 @@ def track(order_no):
     )
 @app.route('/order/<int:id>')
 def order_detail(id):
-    order = Order.query.get_or_404(id) 
-    return render_template('order_detail.html', order=order)
+
+    if 'user' not in session:
+        return redirect('/login')
+
+    order = Order.query.get_or_404(id)
+
+    return render_template(
+        'order_detail.html',
+        order=order
+    )
 
 with app.app_context():
-    db.create_all()
+    db.create_all() 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
