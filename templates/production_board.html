@@ -12,6 +12,54 @@ Production Board
 
 <div class="card dashboard-card">
 
+<div class="card-header bg-success text-white">
+
+Total Orders
+
+</div>
+
+<div class="card-body">
+
+{% for order in totalorders_orders %}
+
+<div class="card order-card">
+
+<div class="card-body">
+
+<b>{{ order.order_no }}</b>
+
+<br>
+
+{{ order.client_name }}
+
+<br><br>
+
+<a
+href="/order/{{order.id}}"
+class="btn btn-sm btn-success">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+<br><br>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
 <div class="card-header bg-primary text-white">
 
 Design
