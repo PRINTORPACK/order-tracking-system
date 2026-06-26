@@ -12,13 +12,17 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
-
+<script>
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("show");
+}
+</script>
 <body>
-    <div class="sidebar" id="sidebar"></div>
 <button class="btn menu-btn d-md-none" onclick="toggleSidebar()">
     <i class="bi bi-list"></i>
 </button>
-<div class="sidebar">
+
+<div class="sidebar" id="sidebar">
 
 <div class="logo">
 

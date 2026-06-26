@@ -143,109 +143,67 @@ body {
 /* =========================
    MOBILE RESPONSIVE
 ========================= */
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
 
-@media screen and (max-width: 768px) {
+.menu-btn{
+    display:none;
+}
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 0;
-    }
+@media(max-width:768px){
 
-    .logo {
-        width: 100%;
-        font-size: 20px;
-        padding: 15px;
-    }
-
-    .sidebar a {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 10px;
-    }
-
-    .topbar {
-        height: auto;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .topbar h4 {
-        font-size: 20px;
-        margin: 0;
-    }
-
-    .card-body {
-        padding: 15px;
-    }
-
-    .dashboard-card {
-        margin-bottom: 15px;
-    }
-
-    .btn {
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .row {
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .menu-btn{
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 2000;
+.menu-btn{
+    display:block;
+    position:fixed;
+    top:15px;
+    left:15px;
+    z-index:2000;
     background:#6C4CF1;
-    color:white;
+    color:#fff;
     border:none;
-    border-radius:10px;
     width:45px;
     height:45px;
-    font-size:24px;
-    }
-    @media(max-width:768px){
-   .sidebar{
-    position:fixed;
+    border-radius:8px;
+}
+
+.sidebar{
     left:-260px;
-    top:0;
     width:250px;
-    height:100%;
+    height:100vh;
+    position:fixed;
     transition:.3s;
-    z-index:1500;
-    }
-    .sidebar.show{
+}
+
+.sidebar.show{
     left:0;
-    }
-    .main-content{
-    margin-left:0 !important;
+}
+
+.main-content{
+    margin-left:0;
+    padding:70px 15px 15px;
+}
+
+.topbar{
+    height:auto;
+    padding:15px;
+}
+
+.col-md-3,
+.col-md-4,
+.col-md-6{
     width:100%;
-    }
-    }
-    .col-md-6,
-    .col-md-4,
-    .col-md-3 {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+    margin-bottom:15px;
+}
+
+.btn{
+    width:100%;
+    margin-bottom:10px;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
 }
