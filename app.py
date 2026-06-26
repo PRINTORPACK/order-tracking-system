@@ -65,6 +65,8 @@ class Order(db.Model):
 
     remarks = db.Column(db.Text)
 
+    order_date = db.Column(db.String(50))
+
     delivery_date = db.Column(db.String(50))
 
     transport_name = db.Column(db.String(100))
@@ -167,6 +169,7 @@ def add_order():
             outside_color=request.form['outside_color'],
             staff_name=request.form['staff_name'],
             remarks=request.form['remarks'],
+            order_date=request.form['order_date'],
             delivery_date=request.form['delivery_date'],
             status='Design',
             amount=0
