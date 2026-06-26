@@ -1,3 +1,5 @@
+from sqlalchemy import func, extract
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -66,6 +68,8 @@ class Order(db.Model):
     remarks = db.Column(db.Text)
 
     order_date = db.Column(db.String(50))
+
+    order_date = db.Column(db.Date)
 
     delivery_date = db.Column(db.String(50))
 
@@ -370,26 +374,39 @@ def reports():
     if 'user' not in session:
         return redirect('/login')
 
+    month = request.args.get("month", datetime.now().month, type=int)
+    year = request.args.get("year", datetime.now().year, type=int)
+
     total_orders = Order.query.count()
 
-    delivered = Order.query.filter_by(
-        status="Delivered"
-    ).count()
+    delivered = Order.query.filter_by(status="Delivered").count()
 
-    dispatched = Order.query.filter_by(
-        status="Dispatched"
-    ).count()
+    dispatched = Order.query.filter_by(status="Dispatched").count()
 
     pending = total_orders - delivered
 
+    staff_report = db.session.query(
+        Order.staff_name,
+        func.count(Order.id)
+    ).filter(
+        extract('month', Order.order_date) == month,
+        extract('year', Order.order_date) == year
+    ).group_by(
+        Order.staff_name
+    ).order_by(
+        func.count(Order.id).desc()
+    ).all()
+
     return render_template(
-        'reports.html',
+        "reports.html",
         total_orders=total_orders,
         delivered=delivered,
         dispatched=dispatched,
-        pending=pending
+        pending=pending,
+        staff_report=staff_report,
+        month=month,
+        year=year
     )
-
 
 @app.route('/track/<order_no>')
 def track(order_no):

@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -67,6 +68,104 @@ Pending
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+<br><br>
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<h4>📊 Staff Monthly Report</h4>
+
+</div>
+
+<div class="card-body">
+
+<form method="GET" class="row mb-4">
+
+<div class="col-md-3">
+
+<label>Month</label>
+
+<select name="month" class="form-control">
+
+{% for m in range(1,13) %}
+
+<option value="{{m}}" {% if month==m %}selected{% endif %}>
+{{m}}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-3">
+
+<label>Year</label>
+
+<input
+type="number"
+name="year"
+value="{{year}}"
+class="form-control">
+
+</div>
+
+<div class="col-md-2">
+
+<br>
+
+<button class="btn btn-purple">
+
+Filter
+
+</button>
+
+</div>
+
+</form>
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+
+<th>Rank</th>
+
+<th>Staff Name</th>
+
+<th>Total Orders</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for staff,count in staff_report %}
+
+<tr>
+
+<td>{{loop.index}}</td>
+
+<td>{{staff}}</td>
+
+<td>{{count}}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
 
 </div>
 
