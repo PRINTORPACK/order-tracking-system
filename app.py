@@ -173,7 +173,10 @@ def add_order():
             outside_color=request.form['outside_color'],
             staff_name=request.form['staff_name'],
             remarks=request.form['remarks'],
-            order_date=request.form['order_date'],
+            order_date=datetime.strptime(
+    request.form['order_date'],
+    "%Y-%m-%d"
+).date(),
             delivery_date=request.form['delivery_date'],
             status='Design',
             amount=0
@@ -247,7 +250,10 @@ def edit_order(id):
 
         order.staff_name = request.form['staff_name']
         order.remarks = request.form['remarks']
-        order.delivery_date = request.form['delivery_date']
+        order.order_date = datetime.strptime(
+    request.form['order_date'],
+    "%Y-%m-%d"
+).date()
 
         db.session.commit()
 
