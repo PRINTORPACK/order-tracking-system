@@ -60,6 +60,52 @@ Open
 
 <div class="card-header bg-success text-white">
 
+Job Card
+
+</div>
+
+<div class="card-body">
+
+{% for order in jobcard_orders %}
+
+<div class="card order-card">
+
+<div class="card-body">
+
+<b>{{ order.order_no }}</b>
+
+<br>
+
+{{ order.client_name }}
+
+<br><br>
+
+<a
+href="/order/{{order.id}}"
+class="btn btn-sm btn-secondary">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card dashboard-card">
+
+<div class="card-header bg-success text-white">
+
 Printing
 
 </div>
