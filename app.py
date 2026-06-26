@@ -188,6 +188,10 @@ def dashboard():
 
     total_orders = Order.query.count()
 
+    design = Order.query.filter_by(status="Design").count()
+
+    jobcard = Order.query.filter_by(status="Job Card").count()
+
     printing = Order.query.filter_by(status="Printing").count()
 
     packing = Order.query.filter_by(status="Packing").count()
@@ -203,6 +207,8 @@ def dashboard():
         'dashboard.html',
         orders=orders,
         total_orders=total_orders,
+        design=design,
+        jobcard=jobcard,
         printing=printing,
         packing=packing,
         dispatched=dispatched,
@@ -276,18 +282,27 @@ def search():
     q = request.args.get('q', '')
 
     orders = Order.query.filter(
-        Order.order_no.contains(q)
+        (Order.order_no.contains(q)) |
+        (Order.client_name.contains(q))
     ).all()
+
+    design = sum(1 for o in orders if o.status == "Design")
+    jobcard = sum(1 for o in orders if o.status == "Job Card")
+    printing = sum(1 for o in orders if o.status == "Printing")
+    packing = sum(1 for o in orders if o.status == "Packing")
+    dispatched = sum(1 for o in orders if o.status == "Dispatched")
 
     return render_template(
         'dashboard.html',
         orders=orders,
         total_orders=len(orders),
-        printing=0,
-        packing=0,
-        dispatched=0
+        design=design,
+        jobcard=jobcard,
+        printing=printing,
+        packing=packing,
+        dispatched=dispatched,
+        total_revenue=0
     )
-
 @app.route('/dispatch/<int:id>', methods=['GET', 'POST'])
 def dispatch(id):
 
