@@ -352,6 +352,10 @@ def production_board():
         status="Design"
     ).all()
 
+    jobcard_orders = Order.query.filter_by(
+        status="Job Card"
+    ).all()
+
     printing_orders = Order.query.filter_by(
         status="Printing"
     ).all()
@@ -369,11 +373,11 @@ def production_board():
     return render_template(
         'production_board.html',
         design_orders=design_orders,
+        jobcard_orders=jobcard_orders,
         printing_orders=printing_orders,
         packing_orders=packing_orders,
         dispatch_orders=dispatch_orders
     )
-
 @app.route('/reports')
 def reports():
 
